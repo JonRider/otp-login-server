@@ -1,0 +1,44 @@
+const express = require("express");
+const axios = require("axios");
+const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.json("A private API to request and verify One Time Passwords.");
+});
+
+app.post("/get-otp", (req, res) => {
+  axios
+    .post("https://textbelt.com/otp/generate", {
+      phone: String(process.env.PHONE),
+      message: "Your text verification code is $OTP",
+      userid: req.body.userid,
+      key: process.env.KEY,
+    })
+    .then((response) => {
+      console.log(response.data);
+      res.json(response.data.success);
+    });
+});
+
+app.post("/verify-otp/", (req, res) => {
+  console.log(req.body);
+  axios
+    .get("https://textbelt.com/otp/verify", {
+      params: {
+        otp: req.body.otp,
+        userid: req.body.userid,
+        key: process.env.KEY,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      res.json(response.data);
+    });
+});
+
+app.listen(5000);
