@@ -21,13 +21,11 @@ app.post("/get-otp", (req, res) => {
       key: process.env.KEY,
     })
     .then((response) => {
-      console.log(response.data);
       res.json(response.data.success);
     });
 });
 
 app.post("/verify-otp/", (req, res) => {
-  console.log(req.body);
   axios
     .get("https://textbelt.com/otp/verify", {
       params: {
@@ -37,7 +35,6 @@ app.post("/verify-otp/", (req, res) => {
       },
     })
     .then((response) => {
-      console.log(response.data);
       res.json(response.data);
     });
 });
