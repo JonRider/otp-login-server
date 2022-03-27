@@ -9,6 +9,9 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://otp-login-page.herokuapp.com/",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 
