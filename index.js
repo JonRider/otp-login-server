@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 app.post("/get-otp", (req, res) => {
   axios
     .post("https://textbelt.com/otp/generate", {
-      phone: String(process.env.PHONE),
+      phone: req.body.phone,
       message: "Your text verification code is $OTP",
       userid: req.body.userid,
       key: process.env.KEY,
