@@ -1,11 +1,13 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors");
+//const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+//Cors needed in Development only
+//app.use(cors());
 
 app.get("/", (req, res) => {
   res.json("A private API to request and verify One Time Passwords.");
@@ -41,4 +43,4 @@ app.post("/verify-otp/", (req, res) => {
     });
 });
 
-app.listen(5000);
+app.listen(process.env.PORT);
