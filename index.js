@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: "https://otp-login-page.herokuapp.com/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
+    preflightContinue: true,
     optionsSuccessStatus: 204,
   })
 );
